@@ -1,6 +1,11 @@
-// models/Product.ts
-
 import { Schema, model, models } from 'mongoose'
+
+// Utility function to generate slug from product name
+const generateSlug = (name: string) =>
+  name
+    .toLowerCase()
+    .replace(/\s+/g, '-')
+    .replace(/[^\w-]+/g, '')
 
 const productSchema = new Schema(
   {
@@ -8,6 +13,11 @@ const productSchema = new Schema(
       type: String,
       required: true,
       trim: true,
+    },
+    slug: {
+      type: String,
+      required: true,
+      unique: true,
     },
     description: {
       type: String,
@@ -50,6 +60,14 @@ const productSchema = new Schema(
     timestamps: true,
   }
 )
+
+// Auto-generate slug before saving
+productSchema.pre('save', function (next) {
+  if (this.isModified('name') || !this.slug) {
+    this.slug = generateSlug(this.name)
+  }
+  next()
+})
 
 const Product = models.Product || model('Product', productSchema)
 
