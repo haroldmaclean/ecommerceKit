@@ -1,5 +1,6 @@
-import '../globals.css' // ✅ updated path
+import '../globals.css'
 import { ThemeProvider } from '@/components/ThemeProvider'
+import Navbar from '@/components/layout/Navbar' // ✅ Add this import
 
 export const metadata = {
   title: 'CommerceKit',
@@ -15,6 +16,7 @@ export default function RootLayout({
     <html lang='en' suppressHydrationWarning>
       <body>
         <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
+          <Navbar /> {/* ✅ Add this line */}
           {children}
         </ThemeProvider>
       </body>
