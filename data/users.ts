@@ -1,16 +1,15 @@
-import bcrypt from 'bcryptjs'
-
+// data/users.ts
 export const users = [
   {
     name: 'Admin User',
     email: 'admin@example.com',
-    password: bcrypt.hashSync('admin123', 10), // hashed password
+    password: 'admin123', // <--- Store plain text here
     isAdmin: true,
   },
   {
     name: 'John Doe',
     email: 'john@example.com',
-    password: bcrypt.hashSync('john123', 10),
+    password: 'john123', // <--- Store plain text here
     isAdmin: false,
   },
 ]
